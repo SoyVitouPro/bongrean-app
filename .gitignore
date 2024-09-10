@@ -1,0 +1,6 @@
+bongrean-env/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+__pycache__
