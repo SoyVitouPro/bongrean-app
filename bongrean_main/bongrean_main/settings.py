@@ -70,7 +70,8 @@ SOCIALACCOUNT_PROVIDERS = {
         },
         'AUTH_PARAMS': {
             'access_type':'online',
-        }
+        },
+        'REDIRECT_URI': 'http://localhost:8000/accounts/google/login/callback/',
     }
 }
 
