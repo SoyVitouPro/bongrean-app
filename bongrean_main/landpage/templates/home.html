@@ -28,9 +28,25 @@
                         Watch video
                     </a>
                 </div>
-                <div class="mt-8 flex items-center space-x-4">
+                <div class="mt-8 mx-2 flex items-center space-x-4">
                     <span class="text-gray-600">23K+ Students</span>
                     <span class="text-gray-600">3K+ Courses</span>
+                </div>
+                <!-- Search and Filter Section -->
+                <div class="container mt-8 py-8">
+                    <div class="flex justify-center items-center space-x-4">
+                        <input type="text" placeholder="Course name..."
+                            class="px-4 py-2 border rounded-lg w-full md:w-1/2">
+                        <select class="px-4 py-2 border rounded-lg">
+                            <option value="all">All Categories</option>
+                            <option value="web-development">Web Development</option>
+                            <option value="data-science">Data Science</option>
+                            <option value="digital-marketing">Digital Marketing</option>
+                            <!-- Add more categories as needed -->
+                        </select>
+                        <button
+                            class="bg-green-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-600 transition duration-300">Search</button>
+                    </div>
                 </div>
             </div>
             <div class="md:w-1/2 relative overflow-hidden">
@@ -58,7 +74,8 @@
                     height: 80%;
                     overflow: hidden;
                     animation: blob-animation 6s ease-in-out infinite;
-                    border: 10px solid #E6F3F5; /* Added watercolor border */
+                    border: 10px solid #E6F3F5;
+                    /* Added watercolor border */
                 }
 
                 .student-image {
@@ -92,6 +109,8 @@
             </style>
 
         </div>
+
+
 
         <div class="container mx-auto px-4 py-16">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -143,34 +162,116 @@
             </div>
         </div>
 
-        <div class="container mx-auto py-16">
-            <h2 class="text-4xl font-bold mb-8 text-center">Featured Courses</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <img src="{% static 'images/course1.jpg' %}" alt="Course 1"
+        <div class="container mx-auto px-4 py-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Explore Courses by Categories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{% static 'images/image_01.jpg' %}" alt="Graphic Design"
                         class="w-full h-48 object-cover mb-4 rounded">
-                    <h3 class="text-2xl font-bold mb-2">Web Development Fundamentals</h3>
-                    <p class="mb-4 text-gray-600">Learn the basics of HTML, CSS, and JavaScript to build responsive
-                        websites.</p>
-                    <a href="#" class="text-green-500 hover:underline">Learn More</a>
+                    <h3 class="text-xl font-semibold mb-2">Graphic Design</h3>
+                    <p class="text-gray-600">Over 700 Courses</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <img src="{% static 'images/course2.jpg' %}" alt="Course 2"
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{% static 'images/image_01.jpg' %}" alt="UI/UX Design"
                         class="w-full h-48 object-cover mb-4 rounded">
-                    <h3 class="text-2xl font-bold mb-2">Data Science Essentials</h3>
-                    <p class="mb-4 text-gray-600">Master the fundamentals of data analysis, visualization, and machine
-                        learning.</p>
-                    <a href="#" class="text-green-500 hover:underline">Learn More</a>
+                    <h3 class="text-xl font-semibold mb-2">UI/UX Design</h3>
+                    <p class="text-gray-600">Over 400 Courses</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <img src="{% static 'images/course3.jpg' %}" alt="Course 3"
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{% static 'images/image_01.jpg' %}" alt="Software Development"
                         class="w-full h-48 object-cover mb-4 rounded">
-                    <h3 class="text-2xl font-bold mb-2">Digital Marketing Strategy</h3>
-                    <p class="mb-4 text-gray-600">Develop effective digital marketing campaigns and measure their
-                        success.</p>
-                    <a href="#" class="text-green-500 hover:underline">Learn More</a>
+                    <h3 class="text-xl font-semibold mb-2">Software Development</h3>
+                    <p class="text-gray-600">Over 350 Courses</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{% static 'images/image_01.jpg' %}" alt="Web Development"
+                        class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-semibold mb-2">Web Development</h3>
+                    <p class="text-gray-600">Over 340 Courses</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{% static 'images/image_01.jpg' %}" alt="Photography"
+                        class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-semibold mb-2">Photography</h3>
+                    <p class="text-gray-600">Over 540 Courses</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{% static 'images/image_01.jpg' %}" alt="Audio + Music"
+                        class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-semibold mb-2">Audio + Music</h3>
+                    <p class="text-gray-600">Over 150 Courses</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{% static 'images/image_01.jpg' %}" alt="Digital Marketing"
+                        class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-semibold mb-2">Digital Marketing</h3>
+                    <p class="text-gray-600">Over 200 Courses</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{% static 'images/image_01.jpg' %}" alt="3D + Animation"
+                        class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-semibold mb-2">3D + Animation</h3>
+                    <p class="text-gray-600">Over 300 Courses</p>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="#" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600">View All
+                    Courses</a>
+            </div>
+        </div>
+
+    <footer class="bg-green-50 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center">
+                        <img src="{% static 'images/bongrean_logo.png' %}" alt="E-Skills Logo" class="h-12 w-auto mr-2">
+                        <span class="text-2xl font-bold text-green-500">.com</span>
+                    </div>
+                    <p class="text-gray-600 mt-4 ml-5">Practice-based learning platform to enhance skills</p>
+                    <p class="text-gray-600 mt-2 ml-5">Follow us on social media</p>
+                    <div class="flex space-x-8 mt-4 ml-5">
+                        <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-green-600 hover:text-green-800"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-xl font-semibold text-gray-800">Resources</h3>
+                    <ul class="text-gray-600 space-y-2 mt-4">
+                        <li><a href="#" class="hover:text-green-600">Home</a></li>
+                        <li><a href="#" class="hover:text-green-600">Courses</a></li>
+                        <li><a href="#" class="hover:text-green-600">Pages</a></li>
+                        <li><a href="#" class="hover:text-green-600">Instructors</a></li>
+                        <li><a href="#" class="hover:text-green-600">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-xl font-semibold text-gray-800">Contact</h3>
+                    <ul class="text-gray-600 space-y-2 mt-4">
+                        <li><i class="fas fa-phone-alt"></i> +855964060587</li>
+                        <li><i class="fas fa-phone-alt"></i> +85570353014</li>
+                        <li><i class="fas fa-envelope"></i> soyvitou@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123, New Lenox, Chicago</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800">Become an Instructor</h3>
+                    <p class="text-gray-600">We only work with the best companies around the globe</p>
+                    <a href="#" class="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition duration-300 mt-4 inline-block">Register now</a>
+                </div>
+            </div>
+            <div class="flex justify-between items-center mt-8 text-gray-600 bg-white rounded-lg p-3">
+                <p>© 2023 All rights reserved. Terms of Use and Privacy Policy</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-green-600">Privacy</a>
+                    <a href="#" class="hover:text-green-600">Terms</a>
+                    <a href="#" class="hover:text-green-600">Sitemap</a>
+                    <a href="#" class="hover:text-green-600">Purchase</a>
                 </div>
             </div>
         </div>
+    </footer>
     </div>
     {% endblock %}
