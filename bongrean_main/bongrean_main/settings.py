@@ -47,22 +47,33 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'landpage',
+
+    'user',
+
+    # all auth configurations
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google'
 ]
 
 
-SOCIAL_ACCOUNT_PROVIDERS ={
-    "google": {
-        "SCOPE": [
-            "profile",
-            "email"
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE' : [
+            'profile',
+            'email'
         ],
-        "AUTH_PARAMS":{"access_type": "online"}
+        'APP': {
+            'client_id': os.getenv('CLIENT_ID'),
+            'secret': os.getenv('CLIENT_SECRET'),
+        },
+        'AUTH_PARAMS': {
+            'access_type':'online',
+        }
     }
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -156,9 +167,9 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    "allauth.accounts.auth_backends.AuthenticationBackend"
-)
-LOGIN_DIRECT_URL = "/"
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+LOGIN_REDIRECT_URL = '/user/profile/'  # Redirect to the custom profile page
 LOGOUT_DIRECT_URL = "/"

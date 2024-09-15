@@ -1,16 +1,17 @@
+{% load socialaccount %} //make sure to add this
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Login Page</title>
+    <title>Document</title>
 </head>
-
 <body>
-    {% load socialaccount %}
-    <h2>Google Login</h2>
-    <a href="{% provider_login_url 'google' %}?next=/">login with google</a>
+    <h1 style="text-align: center;"> My google OAuth Project </h1>
+    {% if user.is_authenticated %}
+    <p>Welcome. You are logged in as {{user.username}} </p>
+    {% else %}
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    {% endif %}
 </body>
-
 </html>
