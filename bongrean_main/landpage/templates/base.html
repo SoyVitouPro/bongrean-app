@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +8,37 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-900 text-white">
-    <header class="bg-gray-800 p-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold">Education Platform</h1>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="#" class="hover:text-blue-400">Home</a></li>
-                    <li><a href="#" class="hover:text-blue-400">Courses</a></li>
-                    <li><a href="#" class="hover:text-blue-400">About</a></li>
-                    <li><a href="#" class="hover:text-blue-400">Contact</a></li>
-                </ul>
-            </nav>
+<body class="bg-white text-gray-800">
+    <header class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <img src="{% static 'images/bongrean_logo.png' %}" alt="E-Skills Logo" class="h-12 w-auto mr-2">
+                    <span class="text-2xl font-bold text-green-500">.com</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-green-500">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500">Courses</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500">Pages</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500">Instructors</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500">Blog</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500">Contact</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-green-500">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-green-500">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600">
+                        My Courses
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

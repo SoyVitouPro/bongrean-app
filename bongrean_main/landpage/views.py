@@ -8,7 +8,4 @@ load_dotenv()
 
 # Create your views here.
 def home(request):
-    db_name = os.getenv('DB_NAME')
-    print(f"DB_NAME: {db_name}")
-    
     return render(request, 'home.html')
