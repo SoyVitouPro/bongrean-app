@@ -40,14 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'landpage',
-    'user',
     'django.contrib.sites',
+    'landpage',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.provider.google'
+    'allauth.socialaccount.providers.google',
 ]
+
 
 SOCIAL_ACCOUNT_PROVIDERS ={
     "google": {
@@ -67,6 +67,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+      # Add the allauth middleware here
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'bongrean_main.urls'
