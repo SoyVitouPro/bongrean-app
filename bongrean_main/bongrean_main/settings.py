@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-e*5)gr*@y&_)1uh41__5kx7-tnu*@asx8$5v9pulhexc38dus^
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+SITE_ID = 1
 
 # Application definition
 
@@ -41,7 +41,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'landpage',
+    'user',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.provider.google'
 ]
+
+SOCIAL_ACCOUNT_PROVIDERS ={
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email"
+        ],
+        "AUTH_PARAMS":{"access_type": "online"}
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,9 +89,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bongrean_main.wsgi.application'
 
-
 load_dotenv()
 
+
+print(os.getenv('DB_NAME'))
+print(os.getenv('DB_USER'))
+print(os.getenv('DB_PASSWORD'))
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -84,7 +103,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  # Add this line
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'PASSWORD': "vitou2357.!",
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
     }
@@ -131,3 +150,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    "allauth.accounts.auth_backends.AuthenticationBackend"
+)
+LOGIN_DIRECT_URL = "/"
+LOGOUT_DIRECT_URL = "/"
