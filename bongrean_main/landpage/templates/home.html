@@ -33,133 +33,144 @@
                     <span class="text-gray-600">3K+ Courses</span>
                 </div>
             </div>
-            <!-- Avatar pop-out with blob design -->
             <div class="md:w-1/2 relative overflow-hidden">
-                <div class="avatar-container">
-                    <div class="blob"></div>
-                    <div class="avatar">
-                        <img src="{% static 'images/student.png' %}" alt="Student" class="avatar-image">
+                <div class="blob-container">
+                    <div class="image-mask">
+                        <img src="{% static 'images/student.png' %}" alt="Student" class="student-image">
                     </div>
                 </div>
             </div>
 
             <style>
-                .avatar-container {
+                .blob-container {
                     position: relative;
-                    width: 300px;
-                    height: 300px;
-                    margin: 0 auto;
-                }
-                .blob {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
                     width: 100%;
-                    height: 100%;
-                    background: #8ED1FC;
-                    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-                    animation: blob-animation 6s ease-in-out infinite;
+                    height: 0;
+                    padding-bottom: 100%;
+                    overflow: hidden;
                 }
-                .avatar {
+
+                .image-mask {
                     position: absolute;
                     top: 10%;
                     left: 10%;
                     width: 80%;
                     height: 80%;
                     overflow: hidden;
-                    z-index: 2;
+                    animation: blob-animation 6s ease-in-out infinite;
+                    border: 10px solid #E6F3F5; /* Added watercolor border */
+                }
+
+                .student-image {
+                    width: 100%;
+                    height: 120%;
+                    object-fit: cover;
                     transition: transform 0.3s ease-out;
                 }
-                .avatar-image {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
+
+                .blob-container:hover .student-image {
+                    transform: translateY(-3%);
                 }
-                .avatar-container:hover .avatar {
-                    transform: scale(1.1) translateY(-10px);
-                }
+
                 @keyframes blob-animation {
-                    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-                    33% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
-                    66% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
-                    100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+                    0% {
+                        border-radius: 42% 56% 72% 28% / 42% 42% 56% 48%;
+                    }
+
+                    33% {
+                        border-radius: 72% 28% 48% 48% / 28% 28% 72% 72%;
+                    }
+
+                    66% {
+                        border-radius: 100% 56% 56% 100% / 100% 100% 56% 56%;
+                    }
+
+                    100% {
+                        border-radius: 42% 56% 72% 28% / 42% 42% 56% 48%;
+                    }
                 }
             </style>
-        </div>
-    </div>
 
-    <div class="container mx-auto px-4 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="text-purple-600 mb-4">
-                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-                        </path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Expert Instructors</h3>
-                <p class="text-gray-600">Learn from industry professionals and experienced educators.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="text-blue-600 mb-4">
-                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Flexible Learning</h3>
-                <p class="text-gray-600">Study at your own pace with our on-demand courses.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="text-green-600 mb-4">
-                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Interactive Content</h3>
-                <p class="text-gray-600">Engage with hands-on projects and real-world applications.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="text-yellow-600 mb-4">
-                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Career Support</h3>
-                <p class="text-gray-600">Get guidance and resources to help you succeed in your career.</p>
-            </div>
         </div>
-    </div>
 
-    <div class="container mx-auto py-16">
-        <h2 class="text-4xl font-bold mb-8 text-center">Featured Courses</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <img src="{% static 'images/course1.jpg' %}" alt="Course 1" class="w-full h-48 object-cover mb-4 rounded">
-                <h3 class="text-2xl font-bold mb-2">Web Development Fundamentals</h3>
-                <p class="mb-4 text-gray-600">Learn the basics of HTML, CSS, and JavaScript to build responsive websites.</p>
-                <a href="#" class="text-green-500 hover:underline">Learn More</a>
+        <div class="container mx-auto px-4 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-purple-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Expert Instructors</h3>
+                    <p class="text-gray-600">Learn from industry professionals and experienced educators.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-blue-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Flexible Learning</h3>
+                    <p class="text-gray-600">Study at your own pace with our on-demand courses.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Interactive Content</h3>
+                    <p class="text-gray-600">Engage with hands-on projects and real-world applications.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-yellow-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Career Support</h3>
+                    <p class="text-gray-600">Get guidance and resources to help you succeed in your career.</p>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <img src="{% static 'images/course2.jpg' %}" alt="Course 2" class="w-full h-48 object-cover mb-4 rounded">
-                <h3 class="text-2xl font-bold mb-2">Data Science Essentials</h3>
-                <p class="mb-4 text-gray-600">Master the fundamentals of data analysis, visualization, and machine learning.</p>
-                <a href="#" class="text-green-500 hover:underline">Learn More</a>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <img src="{% static 'images/course3.jpg' %}" alt="Course 3" class="w-full h-48 object-cover mb-4 rounded">
-                <h3 class="text-2xl font-bold mb-2">Digital Marketing Strategy</h3>
-                <p class="mb-4 text-gray-600">Develop effective digital marketing campaigns and measure their success.</p>
-                <a href="#" class="text-green-500 hover:underline">Learn More</a>
+        </div>
+
+        <div class="container mx-auto py-16">
+            <h2 class="text-4xl font-bold mb-8 text-center">Featured Courses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="{% static 'images/course1.jpg' %}" alt="Course 1"
+                        class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-2xl font-bold mb-2">Web Development Fundamentals</h3>
+                    <p class="mb-4 text-gray-600">Learn the basics of HTML, CSS, and JavaScript to build responsive
+                        websites.</p>
+                    <a href="#" class="text-green-500 hover:underline">Learn More</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="{% static 'images/course2.jpg' %}" alt="Course 2"
+                        class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-2xl font-bold mb-2">Data Science Essentials</h3>
+                    <p class="mb-4 text-gray-600">Master the fundamentals of data analysis, visualization, and machine
+                        learning.</p>
+                    <a href="#" class="text-green-500 hover:underline">Learn More</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="{% static 'images/course3.jpg' %}" alt="Course 3"
+                        class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-2xl font-bold mb-2">Digital Marketing Strategy</h3>
+                    <p class="mb-4 text-gray-600">Develop effective digital marketing campaigns and measure their
+                        success.</p>
+                    <a href="#" class="text-green-500 hover:underline">Learn More</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
