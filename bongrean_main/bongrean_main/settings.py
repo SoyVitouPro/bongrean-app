@@ -71,7 +71,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type':'online',
         },
-        'REDIRECT_URI': 'http://localhost:8000/accounts/google/login/callback/',
     }
 }
 
@@ -172,5 +171,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
+
+LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/user/profile/'  # Redirect to the custom profile page
 LOGOUT_DIRECT_URL = "/"
