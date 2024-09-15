@@ -99,10 +99,6 @@ WSGI_APPLICATION = 'bongrean_main.wsgi.application'
 
 load_dotenv()
 
-
-print(os.getenv('DB_NAME'))
-print(os.getenv('DB_USER'))
-print(os.getenv('DB_PASSWORD'))
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
