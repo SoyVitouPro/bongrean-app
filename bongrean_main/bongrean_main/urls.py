@@ -22,4 +22,6 @@ urlpatterns = [
     path('', include('landpage.urls')),
     path('user/', include('user.urls')),
     path('accounts/', include('allauth.urls')),
+    path('courses/', include('courses.urls')),
+    path('instructors/', include('instructors.urls')),
 ]
