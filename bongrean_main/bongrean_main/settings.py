@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'courses',
     'user',
     'blogs',
+    'contacts',
     # all auth configurations
     'allauth',
     'allauth.account',
