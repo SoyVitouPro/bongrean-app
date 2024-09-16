@@ -51,9 +51,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'courses_admin' %}" class="flex items-center p-2 {% if request.resolver_match.url_name == 'analytics' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                        <a href="{% url 'courses_admin' %}" class="flex items-center p-2 {% if request.resolver_match.url_name == 'courses_admin' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
                             <i class="fas fa-chart-bar mr-3"></i>
-                            Courses-admin
+                            Courses
                         </a>
                     </li>
                     <li>
