@@ -47,3 +47,9 @@ def login(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+def user_content(request):
+    return render(request, 'content.html')
+
+def courses_admin(request):
+    return render(request, 'courses-admin.html')

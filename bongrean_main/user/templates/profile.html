@@ -1,38 +1,74 @@
-{% extends 'base.html' %}
+{% extends 'profile-header.html' %}
 
 {% block content %}
-<div class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
-        <div class="text-center mb-6">
-            <h1 class="text-2xl font-bold">Welcome, {{ full_name }}!</h1>
-            <p class="text-gray-600">You are successfully logged in.</p>
+{% load static %}
+
+<div class="ml-64 bg-gray-100 min-h-screen p-8">
+    <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Quick Stats -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4">Quick Stats</h2>
+            <div class="space-y-2">
+                <p><span class="font-medium">Total Videos:</span> 15</p>
+                <p><span class="font-medium">Total Views:</span> 10,234</p>
+                <p><span class="font-medium">Total Subscribers:</span> 1,500</p>
+            </div>
         </div>
 
-        <!-- Profile Picture Section -->
-        <div class="flex justify-center mb-4">
-            {% if profile_picture_url %}
-                <img src="{{ profile_picture_url }}" alt="Profile Picture" class="rounded-full w-32 h-32">
-            {% else %}
-                <p class="text-gray-500">No profile picture available.</p>
-            {% endif %}
+        <!-- Recent Activity -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
+            <ul class="space-y-2">
+                <li>New comment on "Video Title 1"</li>
+                <li>5 new subscribers</li>
+                <li>"Video Title 2" reached 1000 views</li>
+            </ul>
         </div>
 
-        <!-- User Info Section -->
-        <div class="mb-6">
-            <p class="text-gray-800"><strong>Email:</strong> {{ email }}</p>
-            {% if last_login %}
-                <p class="text-gray-800"><strong>Last Login:</strong> {{ last_login }}</p>
-            {% else %}
-                <p class="text-gray-800"><strong>Last Login:</strong> No login data available.</p>
-            {% endif %}
+        <!-- Quick Actions -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+            <div class="space-y-2">
+                <button class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Upload New Video</button>
+                <button class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">Create Playlist</button>
+                <button class="w-full bg-purple-500 text-white py-2 rounded hover:bg-purple-600">Live Stream</button>
+            </div>
         </div>
+    </div>
 
-        <!-- Logout Button -->
-        <div class="text-center">
-            <a href="{% url 'logout' %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Logout
-            </a>
+    <!-- Recent Videos -->
+    <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-semibold mb-4">Recent Videos</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-4 bg-gray-100 font-semibold text-left">Title</th>
+                        <th class="py-2 px-4 bg-gray-100 font-semibold text-left">Views</th>
+                        <th class="py-2 px-4 bg-gray-100 font-semibold text-left">Likes</th>
+                        <th class="py-2 px-4 bg-gray-100 font-semibold text-left">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="py-2 px-4">Video Title 1</td>
+                        <td class="py-2 px-4">1,234</td>
+                        <td class="py-2 px-4">98</td>
+                        <td class="py-2 px-4">Jul 25, 2024</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4">Video Title 2</td>
+                        <td class="py-2 px-4">987</td>
+                        <td class="py-2 px-4">76</td>
+                        <td class="py-2 px-4">Jul 23, 2024</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
 {% endblock %}

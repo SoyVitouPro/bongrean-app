@@ -1,0 +1,54 @@
+{% extends 'profile-header.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="ml-64 bg-gray-100 min-h-screen p-8">
+    <h1 class="text-3xl font-bold mb-6">My Studio</h1>
+    
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b border-gray-200">Video</th>
+                    <th class="py-2 px-4 border-b border-gray-200">Title</th>
+                    <th class="py-2 px-4 border-b border-gray-200">Visibility</th>
+                    <th class="py-2 px-4 border-b border-gray-200">Restrictions</th>
+                    <th class="py-2 px-4 border-b border-gray-200">Date</th>
+                    <th class="py-2 px-4 border-b border-gray-200">Views</th>
+                    <th class="py-2 px-4 border-b border-gray-200">Comments</th>
+                    <th class="py-2 px-4 border-b border-gray-200">Likes</th>
+                    <th class="py-2 px-4 border-b border-gray-200">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Video Row -->
+                <tr>
+                    <td class="py-2 px-4 border-b border-gray-200">
+                        <img src="{% static 'images/image_01.jpg' %}" alt="Video Thumbnail" class="w-20 h-12 object-cover">
+                    </td>
+                    <td class="py-2 px-4 border-b border-gray-200">Video Title</td>
+                    <td class="py-2 px-4 border-b border-gray-200">Public</td>
+                    <td class="py-2 px-4 border-b border-gray-200">None</td>
+                    <td class="py-2 px-4 border-b border-gray-200">Jul 25, 2024</td>
+                    <td class="py-2 px-4 border-b border-gray-200">1.2K</td>
+                    <td class="py-2 px-4 border-b border-gray-200">1</td>
+                    <td class="py-2 px-4 border-b border-gray-200">100%</td>
+                    <td class="py-2 px-4 border-b border-gray-200">
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Edit</button>
+                    </td>
+                </tr>
+                <!-- Add more video rows here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Upload Button -->
+    <div class="mt-8">
+        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg">
+            <i class="fas fa-upload mr-2"></i> Upload New Video
+        </button>
+    </div>
+</div>
+
+{% endblock %}

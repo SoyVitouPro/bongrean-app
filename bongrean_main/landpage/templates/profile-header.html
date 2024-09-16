@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bong Rean Studio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-gray-900 text-white fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <button id="sidebar-toggle" class="mr-4 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="text-xl font-bold">Bongrean Studio</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-sm">
+                    CREATE
+                </button>
+                <div class="relative">
+                    <input type="text" placeholder="Search" class="bg-gray-800 text-white px-4 py-2 rounded-sm">
+                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                </div>
+                <button class="text-xl">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <img src="{% static 'images/profile_default_avatar.jpg' %}" alt="User Avatar" class="w-8 h-8 rounded-full">
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-16">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="bg-gray-900 text-white w-64 min-h-screen p-4 fixed left-0 top-16 bottom-0 overflow-y-auto">
+            <nav>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{% url 'user_profile' %}" class="flex items-center p-2 {% if request.resolver_match.url_name == 'user_profile' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                            <i class="fas fa-home mr-3"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user_content' %}" class="flex items-center p-2 {% if request.resolver_match.url_name == 'user_content' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                            <i class="fas fa-video mr-3"></i>
+                            Content
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'courses_admin' %}" class="flex items-center p-2 {% if request.resolver_match.url_name == 'analytics' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            Courses-admin
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 {% if request.resolver_match.url_name == 'comments' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                            <i class="fas fa-comments mr-3"></i>
+                            Comments
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 {% if request.resolver_match.url_name == 'monetization' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                            <i class="fas fa-dollar-sign mr-3"></i>
+                            Monetization
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 {% if request.resolver_match.url_name == 'settings' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                            <i class="fas fa-cog mr-3"></i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 ml-64">
+            <!-- Your main content goes here -->
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

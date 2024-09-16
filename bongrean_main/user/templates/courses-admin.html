@@ -1,0 +1,46 @@
+{% extends 'profile-header.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="ml-64 bg-gray-100 min-h-screen p-8">
+    <h1 class="text-3xl font-bold mb-6">Course Administration</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Course Card -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <img src="{% static 'images/image_01.jpg' %}" alt="Course Thumbnail" class="w-full h-32 object-cover rounded mb-4">
+            <h2 class="text-xl font-semibold mb-4">Course Title 1</h2>
+            <div class="space-y-2">
+                <p><span class="font-medium">Total Lessons:</span> 10</p>
+                <p><span class="font-medium">Total Views:</span> 5,000</p>
+                <p><span class="font-medium">Created On:</span> Jan 1, 2024</p>
+            </div>
+            <button class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">View Course</button>
+        </div>
+
+        <!-- Course Card -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <img src="{% static 'images/image_01.jpg' %}" alt="Course Thumbnail" class="w-full h-32 object-cover rounded mb-4">
+            <h2 class="text-xl font-semibold mb-4">Course Title 2</h2>
+            <div class="space-y-2">
+                <p><span class="font-medium">Total Lessons:</span> 8</p>
+                <p><span class="font-medium">Total Views:</span> 3,200</p>
+                <p><span class="font-medium">Created On:</span> Feb 15, 2024</p>
+            </div>
+            <button class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">View Course</button>
+        </div>
+
+        <!-- Add more course cards as needed -->
+    </div>
+
+    <!-- Create New Course Button -->
+    <div class="mt-8">
+        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg">
+            <i class="fas fa-plus mr-2"></i> Create New Course
+        </button>
+    </div>
+</div>
+
+{% endblock %}
+
