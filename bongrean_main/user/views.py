@@ -49,8 +49,6 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-def user_content(request):
-    return render(request, 'content.html')
 
 
 

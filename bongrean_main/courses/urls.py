@@ -9,7 +9,7 @@ urlpatterns = [
     path('course-create/<int:user_id>/', views.create_course, name='course_create'), 
     path('course-delete/<int:course_id>/', views.course_delete, name='course_delete'),
     path('course-edit-detail/<int:course_id>/', views.course_edit_detail, name='course_edit_detail'),
-
+    path('profile/content/', views.user_content, name='user_content'),
     # not use yet
     path('course-list-all/', views.course_list_all, name='course_list_all'), 
     

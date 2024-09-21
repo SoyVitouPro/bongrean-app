@@ -7,7 +7,14 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-    return render(request, 'course.html')
+    # Retrieve all courses from the database
+    courses = Course.objects.all()
+    
+    return render(request, 'course.html', {'courses': courses})
+
+def user_content(request):
+    return render(request, 'content.html')
+
 
 def course_details(request, course_id):
     # Create a sample course
