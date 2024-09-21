@@ -6,6 +6,13 @@
 
 <div class="ml-64 bg-gray-100 min-h-screen p-8">
     <h1 class="text-3xl font-bold mb-6">Course Administration</h1>
+    <!-- Create New Course Button -->
+    <div class="mt-8 mb-8">
+        <button id="create-course-btn"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg">
+            <i class="fas fa-plus mr-2"></i> Create New Course
+        </button>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Call the custom tag and store the result in a variable -->
@@ -29,13 +36,7 @@
         </div>
         {% endfor %}
 
-    <!-- Create New Course Button -->
-    <div class="mt-8">
-        <button id="create-course-btn"
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg">
-            <i class="fas fa-plus mr-2"></i> Create New Course
-        </button>
-    </div>
+    
 
     <!-- Modal for Creating New Course -->
     <div id="create-course-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
