@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body class="bg-gray-100">
     <header class="bg-gray-900 text-white fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -28,48 +30,63 @@
                 <button class="text-xl">
                     <i class="fas fa-bell"></i>
                 </button>
-                <img src="{% static 'images/profile_default_avatar.jpg' %}" alt="User Avatar" class="w-8 h-8 rounded-full">
+                
+                <div class="relative">
+                    <img src="{{ messages.profile_picture }}" id="profile-avatar-admin" alt="User Avatar" class="w-8 h-8 rounded-full cursor-pointer">
+                    <div id="dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                        <a href="{% url 'api_user_profile' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100" target="_blank">Profile</a>
+                        <a href="{% url 'logout' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <div class="flex pt-16">
         <!-- Sidebar -->
-        <aside id="sidebar" class="bg-gray-900 text-white w-64 min-h-screen p-4 fixed left-0 top-16 bottom-0 overflow-y-auto">
+        <aside id="sidebar"
+            class="bg-gray-900 text-white w-64 min-h-screen p-4 fixed left-0 top-16 bottom-0 overflow-y-auto">
             <nav>
                 <ul class="space-y-2">
                     <li>
-                        <a href="{% url 'user_profile' %}" class="flex items-center p-2 {% if request.resolver_match.url_name == 'user_profile' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                        <a href="{% url 'user_profile' %}"
+                            class="flex items-center p-2 {% if request.resolver_match.url_name == 'user_profile' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
                             <i class="fas fa-home mr-3"></i>
                             Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'user_content' %}" class="flex items-center p-2 {% if request.resolver_match.url_name == 'user_content' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                        <a href="{% url 'user_content' %}"
+                            class="flex items-center p-2 {% if request.resolver_match.url_name == 'user_content' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
                             <i class="fas fa-video mr-3"></i>
                             Content
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'courses_admin' %}" class="flex items-center p-2 {% if request.resolver_match.url_name == 'courses_admin' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                        <a href="{% url 'courses_admin' %}"
+                            class="flex items-center p-2 {% if request.resolver_match.url_name == 'courses_admin' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
                             <i class="fas fa-chart-bar mr-3"></i>
                             Courses
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-2 {% if request.resolver_match.url_name == 'comments' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                        <a href="#"
+                            class="flex items-center p-2 {% if request.resolver_match.url_name == 'comments' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
                             <i class="fas fa-comments mr-3"></i>
                             Comments
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-2 {% if request.resolver_match.url_name == 'monetization' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                        <a href="#"
+                            class="flex items-center p-2 {% if request.resolver_match.url_name == 'monetization' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
                             <i class="fas fa-dollar-sign mr-3"></i>
                             Monetization
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-2 {% if request.resolver_match.url_name == 'settings' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
+                        <a href="#"
+                            class="flex items-center p-2 {% if request.resolver_match.url_name == 'settings' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
                             <i class="fas fa-cog mr-3"></i>
                             Settings
                         </a>
@@ -87,9 +104,23 @@
     </div>
 
     <script>
-        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+        document.getElementById('sidebar-toggle').addEventListener('click', function () {
             document.getElementById('sidebar').classList.toggle('hidden');
+        });
+
+        document.getElementById('profile-avatar-admin').addEventListener('click', function (event) {
+            event.stopPropagation(); // Prevent click event from bubbling up
+            document.getElementById('dropdown').classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            var dropdown = document.getElementById('dropdown');
+            if (!dropdown.classList.contains('hidden') && !event.target.closest('#profile-avatar-admin')) {
+                dropdown.classList.add('hidden');
+            }
         });
     </script>
 </body>
+
 </html>

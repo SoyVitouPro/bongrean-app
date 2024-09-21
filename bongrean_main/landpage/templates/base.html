@@ -1,6 +1,8 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body class="bg-white text-gray-800">
     <header class="bg-white border-b border-gray-200">
         <div class="container mx-auto px-4">
@@ -23,16 +26,42 @@
                     <a href="{% url 'blogs' %}" class="text-gray-600 hover:text-green-500">Blog</a>
                     <a href="{% url 'contacts' %}" class="text-gray-600 hover:text-green-500">Contact</a>
                 </nav>
-                <div class="flex items-center space-x-4">
-                    <a href="{% url 'user_profile' %}" class="text-gray-600 hover:text-green-700" target="_blank">
-                        <i class="fas fa-user"></i>
+                <div class="flex items-center space-x-4 relative">
+                   
+                    {% if user.is_authenticated %}
+                    <div class="relative">
+                      
+                        <img src="{{ messages.profile_picture }}" alt="User Avatar"
+                            class="w-8 h-8 rounded-full cursor-pointer" id="profile-avatar">
+                        <div id="notification-icon" class="absolute right-12 top-2">
+                            <i class="fas fa-bell text-gray-600 hover:text-green-500 cursor-pointer text-xl"></i>
+                        </div>
+                        <div id="dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+                            <a href="{% url 'api_user_profile' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100" target="_blank">Profile</a>
+                            <a href="{% url 'logout' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                    <script>
+                        document.getElementById('profile-avatar').addEventListener('click', function(event) {
+                            event.stopPropagation(); // Prevent click event from bubbling up
+                            document.getElementById('dropdown').classList.toggle('hidden');
+                        });
+
+                        // Close dropdown when clicking outside
+                        document.addEventListener('click', function(event) {
+                            var dropdown = document.getElementById('dropdown');
+                            if (!dropdown.classList.contains('hidden') && !event.target.closest('#profile-avatar')) {
+                                dropdown.classList.add('hidden');
+                            }
+                        });
+                    </script>
+                    {% else %}
+                    <a href="{% provider_login_url 'google' %}"
+                        class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
+                        Login
                     </a>
-                    <a href="#" class="text-gray-600 hover:text-green-700">
-                        <i class="fas fa-bell"></i>
-                    </a>
-                    <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
-                        My Courses
-                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -40,4 +69,5 @@
     {% block content %}
     {% endblock %}
 </body>
+
 </html>

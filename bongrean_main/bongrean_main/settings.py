@@ -36,9 +36,12 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
     'instructors',
     'landpage',
     'courses',
@@ -104,6 +106,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'user.context_processors.message_processor',
             ],
         },
     },
@@ -177,5 +180,5 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/user/profile/'  # Redirect to the custom profile page
+LOGIN_REDIRECT_URL = '/'  # Redirect to the custom profile page
 LOGOUT_DIRECT_URL = "/"
