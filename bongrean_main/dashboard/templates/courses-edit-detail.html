@@ -191,8 +191,10 @@
                         <td class="py-2 px-4 border-b border-gray-200 text-center">
                             <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
                                 onclick="openEditLessonModal('{{ lesson.id }}', '{{ lesson.title }}', '{{ lesson.order }}', '{{ lesson.is_free }}')">Edit</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded ml-2"
-                                onclick="">Delete</button>
+                                <form method="POST" action="{% url 'delete_lesson' lesson.id %}" class="mt-4" onsubmit="return confirm('Are you sure you want to delete this course?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">Delete Course</button>
+                                </form>
                         </td>
                     </tr>
                     {% endfor %}
@@ -295,5 +297,8 @@
     // Show the modal
     document.getElementById('edit-lesson-modal').classList.remove('hidden');
 }
+
+
+
 </script>
 {% endblock %}

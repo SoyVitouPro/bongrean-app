@@ -1,3 +1,4 @@
+import subprocess
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -13,7 +14,28 @@ def user_content(request, user_id):
     course_by_user = Course.objects.filter(instructor__user_id=user_id).values('id', 'title', 'description', 'price', 'thumbnail') 
     print(course_by_user)
     return render(request, 'content.html', {'courses': course_by_user}) 
+
+
+def lesson_delete(request, lesson_id):
+    # Retrieve the lesson or return 404
+    lesson = get_object_or_404(Lesson, id=lesson_id)
     
+    if request.method == 'POST':
+        # Get the course ID from the lesson's foreign key relationship
+        course_id = lesson.course.id  # Assuming Lesson model has a ForeignKey to Course
+
+        # Remove the video file from storage
+        if lesson.video:  # Assuming 'video' is the field for the uploaded video file
+            video_path = lesson.video.path  # Get the file path
+            if os.path.exists(video_path):
+                os.remove(video_path)  # Delete the file from storage
+
+        lesson.delete()  # Delete the lesson
+        return redirect('course_edit_detail', course_id=course_id)  # Redirect to course edit detail
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
+
+
 def lesson_update(request, lesson_id):
     if request.method == 'POST':
         lesson = get_object_or_404(Lesson, id=lesson_id)  # Retrieve the lesson or return 404

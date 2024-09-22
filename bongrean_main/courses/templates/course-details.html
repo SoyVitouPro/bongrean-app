@@ -8,8 +8,13 @@
         <!-- Video and Course Content Column -->
         <div class="w-full lg:w-2/3 px-4">
             <div class="relative pb-9/16 mb-4" style="padding-bottom: 0%;">
-                <video id="courseVideo" src="/{{courses.first.video_file}}" controls></video>  <!-- Changed to display the second video -->
+               
+                <video controls>
+                    <source src="/{{courses.first.video_file}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
+            
             <div class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                     <img src="/{{ instructor_image }}" alt="{{ instructor_image }}" class="rounded-full w-12 h-12 mr-4">
