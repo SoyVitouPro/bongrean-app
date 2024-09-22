@@ -49,7 +49,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, related_name='lessons', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()
-    video_url = models.URLField(max_length=255, null=True, blank=True)
+    video_file = models.FileField(upload_to='static/videos/', null=True, blank=True)  # Changed to upload video instead of URL
     duration = models.DurationField()
     order = models.PositiveIntegerField()
     is_free = models.BooleanField(default=False)

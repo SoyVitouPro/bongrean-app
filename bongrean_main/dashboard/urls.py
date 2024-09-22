@@ -1,0 +1,11 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('course-update/<int:course_id>/', views.update_course, name="update_course"),
+    path('course-create/<int:user_id>/', views.create_course, name='course_create'), 
+    path('course-delete/<int:course_id>/', views.course_delete, name='course_delete'),
+    path('course-edit-detail/<int:course_id>/', views.course_edit_detail, name='course_edit_detail'),
+    path('profile/content/', views.user_content, name='user_content'),
+
+]
