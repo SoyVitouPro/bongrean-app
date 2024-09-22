@@ -43,13 +43,13 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
-                ('content', models.TextField()),
-                ('video_url', models.URLField(blank=True, max_length=255, null=True)),
+             
+             
                 ('duration', models.DurationField()),
                 ('order', models.PositiveIntegerField()),
                 ('is_free', models.BooleanField(default=False)),
                 ('views', models.PositiveIntegerField(default=0)),
-                ('average_rating', models.DecimalField(decimal_places=2, default=0.0, max_digits=3)),
+            
                 ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lessons', to='courses.course')),
             ],
         ),

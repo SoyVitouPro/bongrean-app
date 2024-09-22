@@ -1,9 +1,11 @@
+from moviepy.editor import VideoFileClip
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
-from courses.models import Category, Course, Instructor
+from courses.models import Category, Course, Instructor, Lesson
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 
 # Create your views here.
 def home(request):
@@ -69,6 +71,9 @@ def course_list_by_id(request, course_id):
     course = get_object_or_404(Course, id=course_id)  # Retrieve the course or return 404
     context = {'course': course}
     return render(request, 'course-detail.html', context)
+
+
+
 
 
 

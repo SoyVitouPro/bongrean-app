@@ -57,7 +57,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'user_content' %}"
+                        <a href="{% url 'user_content' user_id=request.user.id %}"
                             class="flex items-center p-2 {% if request.resolver_match.url_name == 'user_content' %}bg-gray-800{% else %}hover:bg-gray-800{% endif %} rounded">
                             <i class="fas fa-video mr-3"></i>
                             Content
