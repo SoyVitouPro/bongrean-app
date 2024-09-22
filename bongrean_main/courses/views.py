@@ -21,7 +21,7 @@ def course_details(request, course_id):
     courses = Lesson.objects.filter(course_id = course_id)
     
     context = {
-        'course': courses,
+        'courses': courses,
         'video_range': range(1, 7)  # Pass the range to the template
     }
     
