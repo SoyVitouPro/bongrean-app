@@ -29,11 +29,11 @@
                     required>
                     <option value="{{ course.category.id }}" selected>{{ course.category.name }}</option>
                     {% for category in categories %}
-                        {% if course.category.name != category.name %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
-                        {% endif %}
+                    {% if course.category.name != category.name %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endif %}
                     {% endfor %}
-                    
+
                 </select>
             </div>
             <div class="mb-4">
@@ -43,10 +43,12 @@
             </div>
             <div class="mb-4">
                 <label for="language" class="block text-sm font-medium text-gray-700">Language:</label>
-                <select id="language" name="language" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
-                    <option value="Khmer" {% if course.language == 'Khmer' %}selected{% endif %}>Khmer</option>
-                    <option value="English" {% if course.language == 'English' %}selected{% endif %}>English</option>
+                <select id="language" name="language" class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                    required>
+                    <option value="Khmer" {% if course.language=="Khmer" %}selected{% endif %}>Khmer</option>
+                    <option value="English" {% if course.language=="English" %}selected{% endif %}>English</option>
                 </select>
+
             </div>
             <div class="mb-4">
                 <label for="level" class="block text-sm font-medium text-gray-700">Level:</label>
@@ -71,41 +73,91 @@
             </button>
         </form> <!-- End of course update form -->
         <!-- Move the upload video button outside the form -->
-        <button id="upload-video-btn" type="button" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg" onclick="openUploadModal()">
+        <button id="upload-video-btn" type="button"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg"
+            onclick="openUploadModal()">
             Upload Video
         </button>
 
         <!-- Modal for video upload -->
-        <div id="upload-video-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+        <div id="upload-video-modal"
+            class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-semibold mb-4">Upload Video</h2>
-                <form id="upload-video-form" method="POST" action="{% url 'upload_video' course.id %}" onsubmit="return uploadVideo(event)" enctype="multipart/form-data">
+                <form id="upload-video-form" method="POST" action="{% url 'upload_video' course.id %}"
+                    onsubmit="return uploadVideo(event)" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mb-4">
                         <label for="video-title" class="block text-sm font-medium text-gray-700">Title:</label>
-                        <input type="text" id="video-title" name="title" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                        <input type="text" id="video-title" name="title"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
                     </div>
                     <div class="mb-4">
                         <label for="video-file" class="block text-sm font-medium text-gray-700">Video File:</label>
-                        <input type="file" id="video-file" name="video_file" accept="video/*" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                        <input type="file" id="video-file" name="video_file" accept="video/*"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
                     </div>
-                   
+
                     <div class="mb-4">
                         <label for="is-free" class="block text-sm font-medium text-gray-700">Is Free:</label>
-                        <select id="is-free" name="is_free" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                        <select id="is-free" name="is_free"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
                     </div>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
                         Upload
                     </button>
-                    <button type="button" onclick="closeUploadModal()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
+                    <button type="button" onclick="closeUploadModal()"
+                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
                         Cancel
                     </button>
                 </form>
             </div>
         </div>
+
+        <!-- Modal for editing lesson -->
+        <div id="edit-lesson-modal"
+            class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">Edit Lesson</h2>
+                <form id="edit-lesson-form" method="POST" action="{% url 'update_lesson' 'lesson-id' %}" onsubmit="return updateLesson(event)" enctype="multipart/form-data">
+                    onsubmit="return updateLesson(event)" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" id="lesson-id" name="lesson_id">
+                    <div class="mb-4">
+                        <label for="lesson-title" class="block text-sm font-medium text-gray-700">Title:</label>
+                        <input type="text" id="lesson-title" name="title"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="lesson-order" class="block text-sm font-medium text-gray-700">Order:</label>
+                        <input type="number" id="lesson-order" name="order"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="is-free" class="block text-sm font-medium text-gray-700">Is Free:</label>
+                        <select id="is-free" name="is_free"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
+                        Update Lesson
+                    </button>
+                    <button type="button" onclick="closeEditLessonModal()"
+                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
+                        Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white">
                 <thead>
@@ -124,7 +176,8 @@
                     {% for lesson in course.lessons.all %}
                     <tr>
                         <td class="py-2 px-4 border-b border-gray-200 text-center">
-                            <img src="{% static 'images/image_01.jpg' %}" alt="Video Thumbnail" class="w-20 h-12 object-cover">
+                            <img src="{% static 'images/image_01.jpg' %}" alt="Video Thumbnail"
+                                class="w-20 h-12 object-cover">
                         </td>
                         <td class="py-2 px-4 border-b border-gray-200 text-center">{{ lesson.title }}</td>
                         <td class="py-2 px-4 border-b border-gray-200 text-center">{{ lesson.duration }} min</td>
@@ -133,8 +186,10 @@
                         <td class="py-2 px-4 border-b border-gray-200 text-center">1</td>
                         <td class="py-2 px-4 border-b border-gray-200 text-center">100%</td>
                         <td class="py-2 px-4 border-b border-gray-200 text-center">
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Edit</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded ml-2" onclick="">Delete</button>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                                onclick="openEditLessonModal('{{ lesson.id }}', '{{ lesson.title }}', '{{ lesson.order }}', '{{ lesson.is_free }}')">Edit</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded ml-2"
+                                onclick="">Delete</button>
                         </td>
                     </tr>
                     {% endfor %}
@@ -203,6 +258,52 @@
 
     function closeUploadModal() {
         document.getElementById('upload-video-modal').classList.add('hidden');
+    }
+
+    function openEditLessonModal(lessonId, title, order, isFree) {
+        // Set the values in the form fields
+        document.getElementById('lesson-id').value = lessonId;
+        document.getElementById('lesson-title').value = title;
+        document.getElementById('lesson-order').value = order;
+        document.getElementById('is-free').value = isFree ? 'true' : 'false';
+
+        // Update the action URL with the correct lesson ID
+        const form = document.getElementById('edit-lesson-form');
+        form.action = form.action.replace(/lesson-id/, lessonId);
+
+        // Show the modal
+        document.getElementById('edit-lesson-modal').classList.remove('hidden');
+    }
+
+    function closeEditLessonModal() {
+        document.getElementById('edit-lesson-modal').classList.add('hidden');
+    }
+
+    function updateLesson(event) {
+        event.preventDefault(); // Prevent the default form submission
+        const form = event.target;
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Lesson updated successfully!');
+                    closeEditLessonModal(); // Close the modal on success
+                } else {
+                    alert('Error updating lesson: ' + data.error);
+                }
+            })
+            .catch(error => {
+                alert('An error occurred: ' + error);
+            });
+
+        return false; // Prevent the form from submitting normally
     }
 </script>
 {% endblock %}

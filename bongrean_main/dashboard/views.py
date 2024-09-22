@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from courses.models import Course, Category, Instructor, Lesson
 from django.contrib.auth.decorators import login_required
-from moviepy.editor import VideoFileClip
+from moviepy.editor import VideoFileClip # type: ignore
 from django.core.files.storage import default_storage
 import os
 from datetime import timedelta  # Add this import
@@ -13,6 +13,29 @@ def user_content(request, user_id):
     course_by_user = Course.objects.filter(instructor__user_id=user_id).values('id', 'title', 'description', 'price', 'thumbnail') 
     print(course_by_user)
     return render(request, 'content.html', {'courses': course_by_user}) 
+    
+def lesson_update(request, lesson_id):
+    print(lesson_id)
+    if request.method == 'POST':
+        lesson = get_object_or_404(Lesson, id=lesson_id)  # Retrieve the lesson or return 404
+        
+        # Get form data
+        title = request.POST.get('title')
+        order = request.POST.get('order')
+        is_free = request.POST.get('is_free') == 'true'  # Convert string 'true' to boolean
+        
+        # Update lesson fields
+        lesson.title = title
+        lesson.order = order
+        lesson.is_free = is_free
+
+        # Save the updated lesson
+        lesson.save()
+
+        return JsonResponse({'success': True, 'message': 'Lesson updated successfully!'})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
+    
 
 def create_upload_video(request, course_id):
     if request.method == 'POST':

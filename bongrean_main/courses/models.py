@@ -15,7 +15,7 @@ class Category(models.Model):
 class Instructor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField()
-    profile_pic = models.ImageField(upload_to='instructors/', null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='static/instructor', null=True, blank=True)
 
     def __str__(self):
         return self.user.username
