@@ -18,10 +18,16 @@ def home(request):
 
 
 def course_details(request, course_id):
-    courses = Lesson.objects.filter(course_id = course_id)
+    course = Course.objects.get(id=course_id)  # Correct
+    courses = Lesson.objects.filter(course=course).values('video_file', 'title', 'duration', 'views', 'created_at')  # Changed 'view' to 'views'
+    instructor = Instructor.objects.filter(course=course).first()  # Get the first instructor for the course
+    course_thumbnail = Course.objects.filter(instructor=instructor).values('thumbnail') if instructor else None  # Fetch course thumbnail with instructor id
     
     context = {
         'courses': courses,
+        'instructor_image': instructor.profile_pic if instructor else None,  # Get profile_pic if instructor exists
+        'instructor': instructor.bio if instructor else 'Unknown',  # Get instructor name if exists
+        'course_thumbnail': course_thumbnail,  # Pass course thumbnail to the template
         'video_range': range(1, 7)  # Pass the range to the template
     }
     
