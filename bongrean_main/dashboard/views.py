@@ -52,7 +52,7 @@ def course_edit_detail(request, course_id):
     context = {
         'course': course,
         'categories': categories,
-        'lessons': lessons  # Pass the lessons information to the template
+        'lessons': lessons,
     }
     return render(request, 'courses-edit-detail.html', context)
 

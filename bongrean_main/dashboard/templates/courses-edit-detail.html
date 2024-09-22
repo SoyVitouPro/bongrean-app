@@ -110,32 +110,31 @@
             <table class="min-w-full bg-white">
                 <thead>
                     <tr>
-                        <th class="py-2 px-4 border-b border-gray-200">Video</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Title</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Visibility</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Duration (min)</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Date</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Views</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Comments</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Likes</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Actions</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Video</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Title</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Duration (min)</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Date</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Views</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Comments</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Likes</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for lesson in course.lessons.all %}
                     <tr>
-                        <td class="py-2 px-4 border-b border-gray-200">
+                        <td class="py-2 px-4 border-b border-gray-200 text-center">
                             <img src="{% static 'images/image_01.jpg' %}" alt="Video Thumbnail" class="w-20 h-12 object-cover">
                         </td>
-                        <td class="py-2 px-4 border-b border-gray-200">{{ lesson.title }}</td>
-                        <td class="py-2 px-4 border-b border-gray-200">Public</td>
-                        <td class="py-2 px-4 border-b border-gray-200">{{ lesson.duration}} min</td>
-                        <td class="py-2 px-4 border-b border-gray-200">{{ lesson.created_at }}</td>
-                        <td class="py-2 px-4 border-b border-gray-200">{{ lesson.views }}</td>
-                        <td class="py-2 px-4 border-b border-gray-200">1</td>
-                        <td class="py-2 px-4 border-b border-gray-200">100%</td>
-                        <td class="py-2 px-4 border-b border-gray-200">
+                        <td class="py-2 px-4 border-b border-gray-200 text-center">{{ lesson.title }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200 text-center">{{ lesson.duration }} min</td>
+                        <td class="py-2 px-4 border-b border-gray-200 text-center">{{ lesson.created_at }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200 text-center">{{ lesson.views }}</td>
+                        <td class="py-2 px-4 border-b border-gray-200 text-center">1</td>
+                        <td class="py-2 px-4 border-b border-gray-200 text-center">100%</td>
+                        <td class="py-2 px-4 border-b border-gray-200 text-center">
                             <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Edit</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded ml-2" onclick="">Delete</button>
                         </td>
                     </tr>
                     {% endfor %}
