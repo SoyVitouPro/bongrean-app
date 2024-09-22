@@ -15,24 +15,34 @@ def user_content(request, user_id):
     return render(request, 'content.html', {'courses': course_by_user}) 
     
 def lesson_update(request, lesson_id):
-    print(lesson_id)
     if request.method == 'POST':
         lesson = get_object_or_404(Lesson, id=lesson_id)  # Retrieve the lesson or return 404
-        
+        course = get_object_or_404(Course, id=lesson.course.id)  # Get the associated course
+
         # Get form data
         title = request.POST.get('title')
-        order = request.POST.get('order')
+        new_order = int(request.POST.get('order'))  # Convert order to an integer
         is_free = request.POST.get('is_free') == 'true'  # Convert string 'true' to boolean
-        
+
         # Update lesson fields
         lesson.title = title
-        lesson.order = order
         lesson.is_free = is_free
+        
+        # Check if the new order already exists for another lesson
+        if lesson.order != new_order:
+            existing_lesson = Lesson.objects.filter(order=new_order, course=course).exclude(id=lesson_id).first()
 
-        # Save the updated lesson
+            if existing_lesson:
+                # Swap orders if another lesson with the same order exists
+                existing_lesson.order = lesson.order  # Swap the order
+                existing_lesson.save()
+        
+        # Update the current lesson with the new order
+        lesson.order = new_order
         lesson.save()
 
-        return JsonResponse({'success': True, 'message': 'Lesson updated successfully!'})
+        # Redirect to the course edit detail page
+        return redirect('course_edit_detail', course_id=course.id)
 
     return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
     
@@ -71,7 +81,7 @@ def create_upload_video(request, course_id):
 def course_edit_detail(request, course_id):
     categories = Category.objects.all()
     course = get_object_or_404(Course, id=course_id)  # Retrieve the course or return 404
-    lessons = Lesson.objects.filter(course_id=course_id)  # Fetch lessons using course_id
+    lessons = course.lessons.all().order_by('order')  # Fetch lessons using course_id
     context = {
         'course': course,
         'categories': categories,
