@@ -1,11 +1,12 @@
 
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from courses.models import Category, Course, Instructor, Lesson
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from courses.models import Comment
 
 
 # Create your views here.
@@ -14,6 +15,56 @@ def home(request):
     courses = Course.objects.all()
     
     return render(request, 'course.html', {'courses': courses})
+
+
+# Create a new comment
+def create_comment(request, lesson_id):
+    lesson = get_object_or_404(Lesson, id=lesson_id)
+    
+    if request.method == 'POST':
+        # Extract the content from the POST request
+        content = request.POST.get('content')
+        
+        if content:  # Basic validation to check if content is not empty
+            # Create and save the comment
+            comment = Comment.objects.create(
+                lesson=lesson,
+                user=request.user,
+                content=content
+            )
+            # Redirect to course details page after comment is added
+            return redirect('course_details', course_id=lesson.course.id)
+
+
+# Update an existing comment
+def update_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    
+    # Check if the user is the author of the comment
+    if comment.user != request.user:
+        return HttpResponseForbidden('You are not allowed to edit this comment.')
+    
+    if request.method == 'POST':
+        # Extract the updated content from the POST request
+        content = request.POST.get('content')
+        
+        if content:  # Basic validation to check if content is not empty
+            comment.content = content
+            comment.save()
+            return redirect('course_details', course_id=comment.lesson.course.id)
+
+
+# Delete a comment
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    
+    # Check if the user is the author of the comment
+    if comment.user != request.user:
+        return HttpResponseForbidden('You are not allowed to delete this comment.')
+    
+    if request.method == 'POST':
+        comment.delete()
+        return redirect('course_details', course_id=comment.lesson.course.id)
 
 
 
