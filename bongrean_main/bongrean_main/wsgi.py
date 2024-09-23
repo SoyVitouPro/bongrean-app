@@ -10,7 +10,9 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
+from static_ranges import Ranges # type: ignore
+from dj_static import Cling, MediaCling # type: ignore
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bongrean_main.settings')
 
-application = get_wsgi_application()
+application = Ranges(Cling(MediaCling(get_wsgi_application())))

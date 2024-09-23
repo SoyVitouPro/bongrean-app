@@ -1,4 +1,5 @@
 
+from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
@@ -16,7 +17,6 @@ def home(request):
 
 
 
-
 def course_details(request, course_id):
     course = Course.objects.get(id=course_id)  # Correct
     courses = Lesson.objects.filter(course=course).values('video_file', 'title', 'duration', 'views', 'created_at')  # Changed 'view' to 'views'
@@ -25,6 +25,7 @@ def course_details(request, course_id):
     
     context = {
         'courses': courses,
+        'MEDIA_URL': settings.MEDIA_URL,
         'instructor_image': instructor.profile_pic if instructor else None,  # Get profile_pic if instructor exists
         'instructor': instructor.bio if instructor else 'Unknown',  # Get instructor name if exists
         'course_thumbnail': course_thumbnail,  # Pass course thumbnail to the template

@@ -7,10 +7,10 @@
     <div class="flex flex-wrap justify-center">
         <!-- Video and Course Content Column -->
         <div class="w-full lg:w-2/3 px-4">
+           
             <div class="relative pb-9/16 mb-4" style="padding-bottom: 0%;">
-               
-                <video controls>
-                    <source src="/{{courses.first.video_file}}" type="video/mp4">
+                <video controls id="courseVideo">
+                    <source  src="{{ MEDIA_URL }}{{ courses.first.video_file }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -146,10 +146,12 @@
                 <ul class="list-none space-y-4">
                     {% for video in courses %}
                     <li class="flex items-center border-0 border-black rounded-lg shadow-md p-4 hover:bg-gray-50">
-                        <a href="/{{ video.video_file }}" class="video-link w-full flex items-center" data-src="/{{ video.video_file }}" title="{{course_thumbnail.first.thumbnail}}">
+                        
+                        <a href="{{MEDIA_URL}}{{ video.video_file }}" class="video-link w-full flex items-center" data-src="{{MEDIA_URL}}{{ video.video_file }}" title="{{course_thumbnail.first.thumbnail}}">
                             <div class="w-32 h-18 mr-4 rounded-lg shadow-md">
-                                <img src="/{{ course_thumbnail.first.thumbnail }}" alt="{{course_thumbnail.first.thumbnail}}" class="w-full h-full object-cover rounded-lg">
+                                <img src="{{MEDIA_URL}}{{ course_thumbnail.first.thumbnail }}" alt="{{course_thumbnail.first.thumbnail}}" class="w-full h-full object-cover rounded-lg">
                             </div>
+                            
                             <div>
                                 <span class="text-lg font-semibold">{{ video.title }}</span>
                                 {% with video.duration|split_duration as duration %}

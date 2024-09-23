@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 # Course Model
@@ -21,6 +22,7 @@ class Instructor(models.Model):
         return self.user.username
 
 
+
 class Course(models.Model):
     LEVEL_CHOICES = (
         ('beginner', 'Beginner'),
@@ -32,7 +34,7 @@ class Course(models.Model):
     description = models.TextField()
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    thumbnail = models.ImageField(upload_to='static/thumbnials', null=True, blank=True)
+    thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     language = models.CharField(max_length=50)
     level = models.CharField(max_length=50, choices=LEVEL_CHOICES)
@@ -45,19 +47,33 @@ class Course(models.Model):
         return self.title
 
 
+
 class Lesson(models.Model):
     course = models.ForeignKey(Course, related_name='lessons', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    video_file = models.FileField(upload_to='static/videos/', null=True, blank=True)  # Ensure this matches the view
+    video_file = models.FileField(upload_to='videos/', null=True, blank=True)  # Use 'videos/' under MEDIA_ROOT
     duration = models.DurationField()
     order = models.PositiveIntegerField()
     is_free = models.BooleanField(default=False)
     views = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)  # Added date field with default to now
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.course.title} - {self.title}"
 
+class Comment(models.Model):
+    lesson = models.ForeignKey(Lesson, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Comment by {self.user.username} on {self.lesson.title}"
+
+    @property
+    def is_reply(self):
+        return self.parent is not None
 
 class LessonRating(models.Model):
     lesson = models.ForeignKey(Lesson, related_name='ratings', on_delete=models.CASCADE)
@@ -72,14 +88,6 @@ class LessonRating(models.Model):
         return f"{self.student.username} - {self.rating}"
 
 
-class LessonComment(models.Model):
-    lesson = models.ForeignKey(Lesson, related_name='comments', on_delete=models.CASCADE)
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Comment by {self.student.username} on {self.lesson.title}"
 
 
 class LessonQnA(models.Model):
