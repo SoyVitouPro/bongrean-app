@@ -20,7 +20,7 @@ def home(request):
 # Create a new comment
 def create_comment(request, lesson_id):
     lesson = get_object_or_404(Lesson, id=lesson_id)
-    
+    print(request.POST.get('content'))
     if request.method == 'POST':
         # Extract the content from the POST request
         content = request.POST.get('content')
@@ -70,7 +70,7 @@ def delete_comment(request, comment_id):
 
 def course_details(request, course_id):
     course = Course.objects.get(id=course_id)  # Correct
-    courses = Lesson.objects.filter(course=course).values('video_file', 'title', 'duration', 'views', 'created_at')  # Changed 'view' to 'views'
+    courses = Lesson.objects.filter(course=course).values('id', 'video_file', 'title', 'duration', 'views', 'created_at')  # Changed 'view' to 'views'
     instructor = Instructor.objects.filter(course=course).first()  # Get the first instructor for the course
     course_thumbnail = Course.objects.filter(instructor=instructor).values('thumbnail') if instructor else None  # Fetch course thumbnail with instructor id
     
