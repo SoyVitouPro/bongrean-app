@@ -7,6 +7,7 @@ from courses.models import Category, Course, Instructor, Lesson
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from courses.models import Comment
+from user.models import Profile
 
 
 # Create your views here.
@@ -67,20 +68,31 @@ def delete_comment(request, comment_id):
         return redirect('course_details', course_id=comment.lesson.course.id)
 
 
-
 def course_details(request, course_id):
-    course = Course.objects.get(id=course_id)  # Correct
-    courses = Lesson.objects.filter(course=course).values('id', 'video_file', 'title', 'duration', 'views', 'created_at')  # Changed 'view' to 'views'
-    instructor = Instructor.objects.filter(course=course).first()  # Get the first instructor for the course
-    course_thumbnail = Course.objects.filter(instructor=instructor).values('thumbnail') if instructor else None  # Fetch course thumbnail with instructor id
+    course = get_object_or_404(Course, id=course_id)  # Fetch the specific course
+    lessons = Lesson.objects.filter(course=course).values('id', 'video_file', 'title', 'duration', 'views', 'created_at')
+    instructor = Instructor.objects.filter(course=course).first()  # Fetch the first instructor for the course
+    course_thumbnail = Course.objects.filter(instructor=instructor).values('thumbnail') if instructor else None
+    
+    # Fetch comments related to all lessons of the course along with user profile pictures
+    lesson_ids = lessons.values_list('id', flat=True)  # Get a list of lesson IDs
+    comments = Comment.objects.filter(lesson_id__in=lesson_ids).select_related('user__profile').values(
+        'lesson_id', 
+        'user__username', 
+        'user__profile__profile_picture',  # Fetch the profile picture URL
+        'content', 
+        'created_at'
+    )
     
     context = {
-        'courses': courses,
+        'courses': lessons,
+        'course_id': course_id,
         'MEDIA_URL': settings.MEDIA_URL,
-        'instructor_image': instructor.profile_pic if instructor else None,  # Get profile_pic if instructor exists
-        'instructor': instructor.bio if instructor else 'Unknown',  # Get instructor name if exists
-        'course_thumbnail': course_thumbnail,  # Pass course thumbnail to the template
-        'video_range': range(1, 7)  # Pass the range to the template
+        'instructor_image': instructor.profile_pic if instructor else None,
+        'instructor': instructor.bio if instructor else 'Unknown',
+        'course_thumbnail': course_thumbnail,
+        'video_range': range(1, 7),
+        'comments': comments,  # Pass comments with profile pictures to the template
     }
     
     return render(request, 'course-details.html', context)
