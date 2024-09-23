@@ -62,18 +62,15 @@ class Lesson(models.Model):
         return f"{self.course.title} - {self.title}"
 
 class Comment(models.Model):
-    lesson = models.ForeignKey(Lesson, related_name='comments', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"Comment by {self.user.username} on {self.lesson.title}"
+        return f"Comment by {self.user.username} on {self.course.title if self.course else 'No Course'}"
 
-    @property
-    def is_reply(self):
-        return self.parent is not None
 
 class LessonRating(models.Model):
     lesson = models.ForeignKey(Lesson, related_name='ratings', on_delete=models.CASCADE)
